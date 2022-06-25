@@ -158,6 +158,7 @@ void deleteThisNode(int index) {
 		if (index == nodeIndex) { // if we've traversed to the node we'd like to delete
 			if (temp->prevNodeAddress == NULL && temp->nextNodeAddress == NULL) { // this is the only node in the list
 				cout << endl << endl << "WARNING - YOU'RE DELETING THE ONLY NODE IN THE LIST!" << endl << endl;
+				head = NULL; // wipe out the list
 			}
 			else if (temp->prevNodeAddress == NULL) { // head node
 				temp->nextNodeAddress->prevNodeAddress = NULL; // assign NULL to the prev field of temp's next node (this is the new head node)
@@ -170,8 +171,6 @@ void deleteThisNode(int index) {
 				temp->prevNodeAddress->nextNodeAddress = temp->nextNodeAddress; // point prev node's next address to temp's next address
 				temp->nextNodeAddress->prevNodeAddress = temp->prevNodeAddress; // point next node's prev address to temp's prev address
 			}
-			// now, delete the node by nullifying it (not actually necessary, as this node is lost with the above address redirects, but we'll do it anyway)
-			temp = NULL;
 			cout << "Node of index #" << index << " has been deleted!  Here's the updated list:" << endl;
 			PrintListForward(); // print the list again so the user can verify deletion
 			return; // we can hereby exit the function, as it has performed its, uh, function
