@@ -195,3 +195,44 @@ void DLL::deleteNode() {
 	// then, let user choose index to delete
 	deleteThisNode(getNumberFromUser("ENTER THE INDEX OF THE NODE YOU'D LIKE TO DELETE"));
 }
+
+void DLL::sortedInsert(struct Node** head, struct Node* newNode) {
+	struct Node* currentNode;
+
+	if (*head == NULL) {
+		*head = newNode; // if it's an empty list, the new node will be the head
+	}
+	else if ((*head)->nodeValue >= newNode->nodeValue) { // in this case, the new node will be inserted at the beginning
+		newNode->nextNodeAddress = *head; // set new node's next address to the current head
+		newNode->nextNodeAddress->prevNodeAddress = newNode; // set the new node's next node's previous address to the new node
+		*head = newNode; // set head address to the new node's
+	}
+	else {
+		currentNode = *head; // set current node to head
+
+		while (currentNode->nextNodeAddress != NULL && currentNode->nextNodeAddress->nodeValue < newNode->nodeValue) { // traverse through the list while next isn't null and next's data is less than new node's data
+			currentNode = currentNode->nextNodeAddress; // set current node to next node's address
+		}
+
+		newNode->nextNodeAddress = currentNode->nextNodeAddress; // set new node's next address to be equal to the current node's next address
+		if (currentNode->nextNodeAddress != NULL) { // check to make sure this isn't being inserted at the end of the list
+			newNode->nextNodeAddress->prevNodeAddress = newNode; // if it's not at the end of the list, next node's previous address should be set to the new node's address
+		}
+
+		currentNode->nextNodeAddress = newNode; // set the current node's next to the new node's address
+		newNode->prevNodeAddress = currentNode; // and finally, set the new node's previous address to the current node
+	}
+}
+
+void DLL::PrintInsertionSortedList() {
+	DLL sorted; // instantiate new DLL object
+	struct Node* temp = head;
+	while (temp != NULL) {
+		sortedInsert(&(sorted.head), GetNewNode(temp->nodeValue)); // dereference sorted's head node and pass it to sortedInsert, along with a new node created from temp node's value
+		temp = temp->nextNodeAddress; // jump to next node
+	}
+
+	// after we've populated the new sorted list, print it
+	sorted.PrintListForward();
+
+}

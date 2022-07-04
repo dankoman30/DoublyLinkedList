@@ -15,6 +15,7 @@ private:
 	int getMaximumKey(); // returns maximum key in the list
 	void deleteThisNode(int index);
 	int getNumberFromUser(string message); // function to get input from user
+	void sortedInsert(struct Node** head, struct Node* newNode);
 
 public:
 	DLL();
@@ -22,6 +23,7 @@ public:
 	void AppendAfterTail(int x); // insert new node after tail
 	void PrintListForward();
 	void PrintListReverse();
+	void PrintInsertionSortedList();
 	void populateList1to10();
 	void nullifyHead();
 	Node* Find(int valueToFind);

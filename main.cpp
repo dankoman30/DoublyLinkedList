@@ -25,7 +25,7 @@ int main() {
 	DLL list; // instantiate doubly linked list object (head is set to null during construction
 
     for (;;) { // main loop
-        cout << "\nWhat would you like to do?\n1. Create new linked list of integers 1 through 10\n2. Reset entire list to empty\n3. Print list FORWARD\n4. Print list in REVERSE\n5. Insert new node before head\n6. Append new node to end of list\n7. Get memory address of node with specified value (FIND)\n8. Get minimum and maximum values in the list\n9. Delete a node of specified index\n0. EXIT\n\n";
+        cout << "\nWhat would you like to do?\n1. Create new linked list of integers 1 through 10\n2. Reset entire list to empty\n3. Print list FORWARD\n4. Print list in REVERSE\n5. Insert new node before head\n6. Append new node to end of list\n7. Get memory address of node with specified value (FIND)\n8. Get minimum and maximum values in the list\n9. Delete a node of specified index\n10. Print Insertion-Sorted List\n0. EXIT\n\n";
 		int choice = getNumberFromUser("ENTER A CHOICE");
         switch (choice) {
         case 1: // create new list 1-10
@@ -55,6 +55,9 @@ int main() {
 			continue;
 		case 9: // delete a node of specified index
 			list.deleteNode();
+			continue;
+		case 10:
+			list.PrintInsertionSortedList();
 			continue;
         case 0: // exit
             cout << "\n\nBYE!!!\n\n";
