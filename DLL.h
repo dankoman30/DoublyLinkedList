@@ -1,11 +1,17 @@
 #pragma once
 
+#include <chrono>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <vector>
 
 using namespace std;
+using std::chrono::high_resolution_clock;
+using std::chrono::duration_cast;
+using std::chrono::duration;
+using std::chrono::milliseconds;
 
 template<typename type>
 class DLL {
@@ -15,7 +21,41 @@ private:
 		struct Node* nextNodeAddress;
 		struct Node* prevNodeAddress;
 	};
+
 	struct Node* head; // pointer to head node
+
+	class performanceAnalyzer { // performance analyzer class to construct an object to track function execution times
+	private:
+		std::chrono::steady_clock::time_point startTime, endTime; // PERFORMANCE ANALYSIS
+		duration<double, std::milli> runtimeMillis;
+
+		auto getTime() {
+			return high_resolution_clock::now();
+		}
+	public:
+		void start() {
+			startTime = getTime();
+		}
+		void end() {
+			endTime = getTime();
+			runtimeMillis = endTime - startTime;
+			cout << "\n*************************************************************\n";
+			cout << "\nPERFORMANCE ANALYSIS: THAT OPERATION TOOK " << runtimeMillis.count() << " ms.\n";
+			cout << "\n*************************************************************\n\n";
+		}
+	};
+
+	performanceAnalyzer pa; // instantiate performance analyzer
+
+	int getLength() { // method to retrieve the size of the list
+		struct Node* temp = head;
+		int length = 0; // initialize list length to 0 (because we don't yet know if head is null, indicating 0 length)
+		while (temp != NULL) { // step through list until temp is null
+			length++; // increment length by 1 on each loop iteration
+			temp = temp->nextNodeAddress; // set temp to next node
+		}
+		return length;
+	}
 
 	struct Node* GetNewNode(type x) { // function to get new node (to be used in InsertBeforeHead and InsertAtTail functions
 		struct Node* newNode = (struct Node*)malloc(sizeof(struct Node)); // reserve some memory for this new node in the heap using malloc
@@ -129,6 +169,8 @@ public:
 		head = NULL;
 	};
 
+
+
 	void InsertBeforeHead(type x) { // insert new node before head
 		struct Node* newNode = GetNewNode(x);
 		if (head == NULL) { // (check if we're trying to add to an empty list)
@@ -193,14 +235,20 @@ public:
 	void PrintInsertionSortedList() {
 		DLL sorted; // instantiate new DLL object
 		struct Node* temp = head;
+
+		pa.start(); // start performance analyzer
+
 		while (temp != NULL) {
 			sortedInsert(&(sorted.head), GetNewNode(temp->nodeValue)); // dereference sorted's head node and pass it to sortedInsert, along with a new node created from temp node's value
 			temp = temp->nextNodeAddress; // jump to next node
 		}
 
-		// after we've populated the new sorted list, print it
-		sorted.PrintListForward();
+		pa.end(); // stop performance analyzer
 
+		// after we've populated the new sorted list, give the user the option to print it to the console
+		cout << "\nThe list contains " << sorted.getLength() << " entries... Want to print it?\n1.yes\n2.no\n\n";
+		bool print = getNumberFromUser("YOUR CHOICE") == 1 ? true : false;
+		if (print) sorted.PrintListForward();
 	}
 
 	void nullifyHead() {
