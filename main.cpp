@@ -22,7 +22,7 @@ int getNumberFromUser(string message) { // function to get input from user
 }
 
 int main() {
-	DLL list; // instantiate doubly linked list object (head is set to null during construction
+	DLL<int> list; // instantiate doubly linked list object (head is set to null during construction
 
     for (;;) { // main loop
         cout << "\nWhat would you like to do?\n1. Create new linked list of integers 1 through 10\n2. Reset entire list to empty\n3. Print list FORWARD\n4. Print list in REVERSE\n5. Insert new node before head\n6. Append new node to end of list\n7. Get memory address of node with specified value (FIND)\n8. Get minimum and maximum values in the list\n9. Delete a node of specified index\n10. Print Insertion-Sorted List\n0. EXIT\n\n";
