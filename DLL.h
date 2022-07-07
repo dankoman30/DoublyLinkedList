@@ -121,6 +121,21 @@ private:
 		cout << endl;
 	}
 
+	void privateDeleteList(Node** rHead) // method to delete the entire list
+	{
+		Node* current = *rHead;
+		Node* next = NULL;
+
+		while (current != NULL) // iterate through the list, freeing each node from memory
+		{
+			next = current->nextNodeAddress;
+			free(current);
+			current = next;
+		}
+
+		*rHead = NULL; // dereference the head
+	}
+
 	int getNumberFromUser(string message) { // function to get input from user
 		cout << endl << endl << message + ": ";
 		int entry;
@@ -168,8 +183,6 @@ public:
 	DLL() {
 		head = NULL;
 	};
-
-
 
 	void InsertBeforeHead(type x) { // insert new node before head
 		struct Node* newNode = GetNewNode(x);
@@ -245,14 +258,22 @@ public:
 
 		pa.end(); // stop performance analyzer
 
-		// after we've populated the new sorted list, give the user the option to print it to the console
-		cout << "\nThe list contains " << sorted.getLength() << " entries... Want to print it?\n1.yes\n2.no\n\n";
-		bool print = getNumberFromUser("YOUR CHOICE") == 1 ? true : false;
+		int length = sorted.getLength();
+		bool print;
+
+		// after we've populated the new sorted list, if it's over 100 entries in length, give the user the option to print it to the console
+		if (length > 100) {
+			cout << "\nThe list contains " << length << " entries... Want to print it?\n1.yes\n2.no\n\n";
+			print = getNumberFromUser("YOUR CHOICE") == 1 ? true : false;
+		}
+		else {
+			print = true; // if the list length is not greater than 100, print it by default
+		}
 		if (print) sorted.PrintListForward();
 	}
 
-	void nullifyHead() {
-		head = NULL; // reset list to empty by destroying the head node
+	void deleteList() {
+		if (head != NULL) privateDeleteList(&head);
 	}
 
 	Node* Find(type valueToFind) { // returns a pointer to the first node in the list whose key matches specified value

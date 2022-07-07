@@ -66,6 +66,9 @@ bool generateVectorFromFile(vector<int> &values, string filename) { // pass poin
 		cout << endl << "**********CANNOT OPEN FILE**********" << endl << endl;
 		return false; // return false if file cannot be opened, as it is invalid
 	}
+
+	values.clear(); // clear the vector
+
 	string str;
 	while (getline(in, str)) { // read next line from file until end is reached
 		line++; // increment line number by 1 at the beginning of the loop
@@ -104,6 +107,7 @@ int main() {
         switch (choice) {
         case 1: // create new list with n items
 			if (generateRandomVector(values, getNumberFromUser("ENTER DESIRED NUMBER OF NODES TO ADD TO THE LIST"))) {
+				list.deleteList(); // reset list
 				list.populateListFromVector(values); // add nodes to list
 			}
 			else {
@@ -112,6 +116,7 @@ int main() {
 			continue;
         case 2: // create new list with values from file
 			if (generateVectorFromFile(values, getStringFromUser("ENTER FILENAME"))) {
+				list.deleteList(); // reset list
 				list.populateListFromVector(values);
 			}
 			else {
@@ -143,8 +148,8 @@ int main() {
 		case 10:
 			list.PrintInsertionSortedList();
 			continue;
-		case 11: // reset list to empty (nullify head)
-			list.nullifyHead();
+		case 11: // reset list to empty
+			list.deleteList();
 			continue;
         case 0: // exit
             cout << "\n\nBYE!!!\n\n";
