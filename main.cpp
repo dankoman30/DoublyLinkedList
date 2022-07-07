@@ -101,7 +101,8 @@ int main() {
 			"8. Get minimum and maximum values in the list" << endl <<
 			"9. Delete a node of specified index" << endl <<
 			"10. Print Insertion-Sorted List" << endl <<
-			"11. Reset entire list to empty" << endl <<
+			"11. Print Bubble-Sorted List" << endl <<
+			"12. Reset entire list to empty" << endl <<
 			"0. EXIT\n\n";
 		int choice = getNumberFromUser("ENTER A CHOICE");
         switch (choice) {
@@ -148,8 +149,12 @@ int main() {
 		case 10:
 			list.PrintInsertionSortedList();
 			continue;
-		case 11: // reset list to empty
+		case 11: // print bubble sorted list
+			list.PrintBubbleSortedList();
+			continue;
+		case 12: // reset list to empty
 			list.deleteList();
+	;
 			continue;
         case 0: // exit
             cout << "\n\nBYE!!!\n\n";

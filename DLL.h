@@ -179,6 +179,67 @@ private:
 		}
 	}
 
+	void PrivatePrintBubbleSortedList(struct Node** head) { // accepts head node pointer
+		struct Node* currentNode;
+
+		if (*head == NULL) {
+			cout << endl << "EMPTY LIST!" << endl;
+			return;
+		}
+
+		// create a copy of the list prior to sorting
+		DLL sorted;
+		currentNode = *head;
+		while (currentNode != NULL) {
+			sorted.AppendAfterTail(currentNode->nodeValue); // add values one at a time to the new list
+			currentNode = currentNode->nextNodeAddress;
+		}
+
+		int length = sorted.getLength(); // get list length first
+		struct Node** sortedHead;
+		int outer, inner;
+		bool wasSwapped;
+
+		pa.start(); // start performance analyzer
+
+		for (outer = 0; outer <= length; outer++) { // loop for the number of iterations equal to the list length
+			sortedHead = &(sorted.head); // get sorted's head and define sortedHead with it
+			wasSwapped = false; // initialize this bool to false
+
+			for (inner = 0; inner < length - outer - 1; inner++) { // loop until inner counter reaches value of list length, minus outer counter, minus 1
+				struct Node* first = *sortedHead; // first should be the head
+				struct Node* second = first->nextNodeAddress; // second is first's next
+
+				if (first->nodeValue > second->nodeValue) { // compare node values here
+					struct Node* temp = second->nextNodeAddress; // create a placeholder
+					second->nextNodeAddress = first; // second node's next address points to first
+					first->nextNodeAddress = temp; // first node's next addresss points to the temp node (second node's original next address)
+					*sortedHead = second; // set new head
+					wasSwapped = true; // flag bool to true, indicating a swap has taken place
+				}
+				sortedHead = &(*sortedHead)->nextNodeAddress; // step to the next address
+			}
+
+			if (!wasSwapped) // if there was no swap up to this point, exit the loop
+				break;
+		}
+
+		pa.end(); // stop performance analyzer
+
+		bool print;
+
+		// after we've populated the new sorted list, if it's over 100 entries in length, give the user the option to print it to the console
+		if (length > 100) {
+			cout << "\nThe list contains " << length << " entries... Want to print it?\n1.yes\n2.no\n\n";
+			print = getNumberFromUser("YOUR CHOICE") == 1 ? true : false;
+		}
+		else {
+			print = true; // if the list length is not greater than 100, print it by default
+		}
+		if (print) sorted.PrintListForward();
+
+	}
+
 public:
 	DLL() {
 		head = NULL;
@@ -270,6 +331,10 @@ public:
 			print = true; // if the list length is not greater than 100, print it by default
 		}
 		if (print) sorted.PrintListForward();
+	}
+
+	void PrintBubbleSortedList() {
+		PrivatePrintBubbleSortedList(&head);
 	}
 
 	void deleteList() {
