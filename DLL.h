@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 
 using namespace std;
 
@@ -202,13 +203,6 @@ public:
 
 	}
 
-	void populateList1to10() {
-		head = NULL; // reset head to null to start new empty list
-		for (int i = 1; i < 11; i++) { // repeat for 1 through 10 and then stop
-			AppendAfterTail(i);
-		}
-	}
-
 	void nullifyHead() {
 		head = NULL; // reset list to empty by destroying the head node
 	}
@@ -243,6 +237,16 @@ public:
 		PrintListForward();
 		// then, let user choose index to delete
 		deleteThisNode(getNumberFromUser("ENTER THE INDEX OF THE NODE YOU'D LIKE TO DELETE"));
+	}
+
+	void populateListFromVector(vector<type> values) {
+		head = NULL; // reset head to null to start new empty list
+		cout << endl << "Adding " << values.size() << " nodes from vector to the list.\n";
+		for (int i = 0; i < values.size(); i++) {
+			int value = values[i];
+			cout << "\nAdding a node with value " << value << " to the list.\n";
+			AppendAfterTail(value); //  on each loop iteration to add to the list
+		}
 	}
 
 };

@@ -1,6 +1,8 @@
 #include <iostream>
+#include <random>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 
 #include "DLL.h"
 
@@ -21,15 +23,48 @@ int getNumberFromUser(string message) { // function to get input from user
 	return entry;
 }
 
+vector<int> generateVector(int length) {
+	vector<int> values; // declare vector
+
+	if (length < 1) { // check for 0 or negative cases
+		cout << endl << "Cannot add " << length << " nodes to the list. Number of nodes must be greater than 0.\n";
+	}
+	else {
+		// add items to the vector
+		cout << endl << "Creating a vector containing values 1 to " << length;
+		for (int i = 0; i < length; i++) {
+			values.push_back(i + 1); // add numbers 1 through nodes to the vector
+		}
+
+		// shuffle the vector
+		cout << " and shuffling it in random order." << endl;
+		auto rng = std::default_random_engine{};
+		std::shuffle(std::begin(values), std::end(values), rng);
+	}
+
+	return values;
+}
+
 int main() {
-	DLL<int> list; // instantiate doubly linked list object (head is set to null during construction
+	DLL<int> list; // instantiate doubly linked list object (head is set to null during construction)
 
     for (;;) { // main loop
-        cout << "\nWhat would you like to do?\n1. Create new linked list of integers 1 through 10\n2. Reset entire list to empty\n3. Print list FORWARD\n4. Print list in REVERSE\n5. Insert new node before head\n6. Append new node to end of list\n7. Get memory address of node with specified value (FIND)\n8. Get minimum and maximum values in the list\n9. Delete a node of specified index\n10. Print Insertion-Sorted List\n0. EXIT\n\n";
+        cout << "\nWhat would you like to do?" << endl <<
+			"1. Create new linked list with specified number of integers" << endl <<
+			"2. Reset entire list to empty" << endl <<
+			"3. Print list FORWARD" << endl <<
+			"4. Print list in REVERSE" << endl <<
+			"5. Insert new node before head" << endl <<
+			"6. Append new node to end of list" << endl <<
+			"7. Get memory address of node with specified value (FIND)" << endl <<
+			"8. Get minimum and maximum values in the list" << endl <<
+			"9. Delete a node of specified index" << endl <<
+			"10. Print Insertion-Sorted List" << endl <<
+			"0. EXIT\n\n";
 		int choice = getNumberFromUser("ENTER A CHOICE");
         switch (choice) {
-        case 1: // create new list 1-10
-			list.populateList1to10();
+        case 1: // create new with n items
+			list.populateListFromVector(generateVector(getNumberFromUser("ENTER DESIRED NUMBER OF NODES TO ADD TO THE LIST"))); // add nodes to list
             continue;
         case 2: // reset list to empty (nullify head)
 			list.nullifyHead();
