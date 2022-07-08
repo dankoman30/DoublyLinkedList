@@ -230,7 +230,7 @@ private:
 
 		// after we've populated the new sorted list, if it's over 100 entries in length, give the user the option to print it to the console
 		if (length > 100) {
-			cout << "\nThe list contains " << length << " entries... Want to print it?\n1.yes\n2.no\n\n";
+			cout << "\nThe list contains " << length << " entries... Want to print it?\n1. yes\n2. no\n\n";
 			print = getNumberFromUser("YOUR CHOICE") == 1 ? true : false;
 		}
 		else {
@@ -322,7 +322,7 @@ public:
 
 		// after we've populated the new sorted list, if it's over 100 entries in length, give the user the option to print it to the console
 		if (length > 100) {
-			cout << "\nThe list contains " << length << " entries... Want to print it?\n1.yes\n2.no\n\n";
+			cout << "\nThe list contains " << length << " entries... Want to print it?\n1. yes\n2. no\n\n";
 			print = getNumberFromUser("YOUR CHOICE") == 1 ? true : false;
 		}
 		else {
@@ -379,7 +379,7 @@ public:
 		// if vector has over 100 values, give the user the option of whether or not to print individual lines to the console on each addition
 		bool print;
 		if (length > 100) {
-			cout << "\nThe input vector contains " << length << " values... Want to print each added value to the console?\n1.yes\n2.no\n\n";
+			cout << "\nThe input vector contains " << length << " values... Want to print each added value to the console?\n1. yes\n2. no\n\n";
 			print = getNumberFromUser("YOUR CHOICE") == 1 ? true : false;
 		}
 		else {
