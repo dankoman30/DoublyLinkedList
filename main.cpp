@@ -85,7 +85,17 @@ bool generateVectorFromFile(vector<int> &values, string filename) { // pass poin
 	return true; // return true if values were successfully added to the vector
 }
 
+void intro() {
+	cout << "Welcome to DOUBLY LINKED LISTS!" << endl <<
+		"This application allows you to create doubly linked lists either from randomly-sorted integers from 1 to" << endl <<
+		"your desired MAX_NUMBER, or from a data file containing one integer per line. Various functions can be" << endl <<
+		"performed on the linked list, including insertion, deletion, node memory address retrieval, and sorting" << endl <<
+		"using either insertion-sort or bubble-sort algorithms. Sorting operations are timed for performance" << endl <<
+		"analysis purposes, and results are displayed in the console output. LET'S GET STARTED!" << endl << endl;
+}
+
 int main() {
+	intro();
 	DLL<int> list; // instantiate doubly linked list object (head is set to null during construction)
 	vector<int> values; // declare vector
 
@@ -100,10 +110,11 @@ int main() {
 			"7. Get memory address of node with specified value (FIND)" << endl <<
 			"8. Get minimum and maximum values in the list" << endl <<
 			"9. Delete a node of specified index" << endl <<
-			"10. Print Insertion-Sorted List" << endl <<
-			"11. Print Bubble-Sorted List" << endl <<
+			"10. Print Insertion-Sorted List *" << endl <<
+			"11. Print Bubble-Sorted List *" << endl <<
 			"12. Reset entire list to empty" << endl <<
-			"0. EXIT\n\n";
+			"0. EXIT" << endl << endl <<
+			"(* indicates operations with timed performance analysis)" << endl << endl;
 		int choice = getNumberFromUser("ENTER A CHOICE");
         switch (choice) {
         case 1: // create new list with n items
@@ -146,7 +157,7 @@ int main() {
 		case 9: // delete a node of specified index
 			list.deleteNode();
 			continue;
-		case 10:
+		case 10: // print selection sorted list
 			list.PrintInsertionSortedList();
 			continue;
 		case 11: // print bubble sorted list
