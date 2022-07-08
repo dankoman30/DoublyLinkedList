@@ -100,20 +100,20 @@ int main() {
 
     for (;;) { // main loop
         cout << "\nWhat would you like to do?" << endl <<
-			"1. Create new linked list with specified number of integers" << endl <<
-			"2. Create new linked list with values from file" << endl <<
-			"3. Print list FORWARD" << endl <<
-			"4. Print list in REVERSE" << endl <<
-			"5. Insert new node before head" << endl <<
-			"6. Append new node to end of list" << endl <<
-			"7. Get memory address of node with specified value (FIND)" << endl <<
-			"8. Get minimum and maximum values in the list" << endl <<
-			"9. Delete a node of specified index" << endl <<
+			"1.  Create new linked list with specified number of integers" << endl <<
+			"2.  Create new linked list with values from file" << endl <<
+			"3.  Print list FORWARD" << endl <<
+			"4.  Print list in REVERSE" << endl <<
+			"5.  Insert new node before head" << endl <<
+			"6.  Append new node to end of list" << endl <<
+			"7.  Get memory address of node with specified value (FIND)" << endl <<
+			"8.  Get minimum and maximum values in the list" << endl <<
+			"9.  Delete a node of specified index" << endl <<
 			"10. Print Insertion-Sorted List *" << endl <<
 			"11. Print Bubble-Sorted List *" << endl <<
 			"12. Reset entire list to empty" << endl <<
-			"0. EXIT" << endl << endl <<
-			"(* indicates operations with timed performance analysis)" << endl << endl;
+			"0.  EXIT" << endl << endl <<
+			"       (* indicates operations with timed performance analysis)" << endl << endl;
 		int choice = getNumberFromUser("ENTER A CHOICE");
         switch (choice) {
         case 1: // create new list with n items
