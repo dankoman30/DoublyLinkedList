@@ -202,6 +202,8 @@ private:
 
 		pa.start(); // start performance analyzer
 
+		cout << endl << "working"; // progress indicator
+
 		for (outer = 0; outer <= length; outer++) { // loop for the number of iterations equal to the list length
 			sortedHead = &(sorted.head); // get sorted's head and define sortedHead with it
 			wasSwapped = false; // initialize this bool to false
@@ -218,11 +220,15 @@ private:
 					wasSwapped = true; // flag bool to true, indicating a swap has taken place
 				}
 				sortedHead = &(*sortedHead)->nextNodeAddress; // step to the next address
+
+				cout << "."; // progress indicator
 			}
 
 			if (!wasSwapped) // if there was no swap up to this point, exit the loop
 				break;
 		}
+
+		cout << endl;
 
 		pa.end(); // stop performance analyzer
 
@@ -310,10 +316,15 @@ public:
 
 		pa.start(); // start performance analyzer
 
+		cout << endl << "working"; // progress indicator
+
 		while (temp != NULL) {
 			sortedInsert(&(sorted.head), GetNewNode(temp->nodeValue)); // dereference sorted's head node and pass it to sortedInsert, along with a new node created from temp node's value
 			temp = temp->nextNodeAddress; // jump to next node
+			cout << "."; // progress indicator
 		}
+
+		cout << endl;
 
 		pa.end(); // stop performance analyzer
 
