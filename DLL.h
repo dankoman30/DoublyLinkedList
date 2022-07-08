@@ -237,7 +237,6 @@ private:
 			print = true; // if the list length is not greater than 100, print it by default
 		}
 		if (print) sorted.PrintListForward();
-
 	}
 
 public:
@@ -271,7 +270,6 @@ public:
 		// at this point, temp should be the final node in the list.  now we can append the new node
 		temp->nextNodeAddress = newNode; // point the last node's next field to the new node's address
 		newNode->prevNodeAddress = temp; // point the new node's prev field to the last node's address
-
 	}
 
 	void PrintListForward() {
@@ -382,5 +380,4 @@ public:
 			AppendAfterTail(value); //  on each loop iteration to add to the list
 		}
 	}
-
 };

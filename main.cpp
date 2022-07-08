@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int getNumberFromUser(string message) { // function to get input from user
+int getNumberFromUser(string message) { // function to get input from user, VERIFIES ENTRY IS AN INTEGER
 	cout << endl << endl << message + ": ";
 	int entry;
 	cin >> entry;
@@ -25,7 +25,7 @@ int getNumberFromUser(string message) { // function to get input from user
 	return entry;
 }
 
-std::string getStringFromUser(string message) { // function to get input from user
+std::string getStringFromUser(string message) { // function to get input from user as a simple string
 	cout << endl << endl << message + ": ";
 	string entry;
 	cin >> entry;
@@ -54,7 +54,6 @@ bool generateRandomVector(vector<int> &values, int length) {
 		auto rng = std::default_random_engine{};
 		std::shuffle(std::begin(values), std::end(values), rng);
 	}
-
 	return true;
 }
 
@@ -165,7 +164,6 @@ int main() {
 			continue;
 		case 12: // reset list to empty
 			list.deleteList();
-	;
 			continue;
         case 0: // exit
             cout << "\n\nBYE!!!\n\n";
