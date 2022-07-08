@@ -373,10 +373,22 @@ public:
 
 	void populateListFromVector(vector<type> values) {
 		head = NULL; // reset head to null to start new empty list
-		cout << endl << "Adding " << values.size() << " nodes from vector to the list.\n";
+		int length = values.size();
+		cout << endl << "Adding " << length << " nodes from vector to the list.\n";
+
+		// if vector has over 100 values, give the user the option of whether or not to print individual lines to the console on each addition
+		bool print;
+		if (length > 100) {
+			cout << "\nThe input vector contains " << length << " values... Want to print each added value to the console?\n1.yes\n2.no\n\n";
+			print = getNumberFromUser("YOUR CHOICE") == 1 ? true : false;
+		}
+		else {
+			print = true; // if the input vector does not contain more than 100 values, print each line by default
+		}
+
 		for (int i = 0; i < values.size(); i++) {
 			int value = values[i];
-			cout << "\nAdding a node with value " << value << " to the list.\n";
+			if (print) cout << "\nAdding a node with value " << value << " to the list.\n";
 			AppendAfterTail(value); //  on each loop iteration to add to the list
 		}
 	}
